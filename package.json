@@ -9,6 +9,7 @@
     "build": "npm run compile",
     "start": "npm run compile:watch",
     "serve": "node out/dist",
+    "serve:watch": "node out/dist -w",
     "compile": "tsc",
     "compile:watch": "tsc -w"
   },
@@ -17,7 +18,9 @@
     "pino-pretty": "2.2.0"
   },
   "devDependencies": {
+    "@types/chokidar": "1.7.5",
     "@types/node": "10.9.4",
+    "chokidar": "2.0.4",
     "typescript": "3.0.3"
   }
 }
