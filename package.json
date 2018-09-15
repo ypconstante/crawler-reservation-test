@@ -4,5 +4,15 @@
   "main": "out/dist/index.js",
   "repository": "git@github.com:ypconstante/hotel-reservation-crawler-test.git",
   "author": "Yuri Pereira <ypconstante@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run compile",
+    "start": "npm run compile:watch",
+    "compile": "tsc",
+    "compile:watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/node": "10.9.4",
+    "typescript": "3.0.3"
+  }
 }
