@@ -1,5 +1,3 @@
-log("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+import {startServer} from './web/startServer'
 
-function log(message: string): void {
-  console.log(message)
-}
+startServer()

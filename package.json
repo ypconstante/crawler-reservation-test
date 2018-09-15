@@ -8,8 +8,13 @@
   "scripts": {
     "build": "npm run compile",
     "start": "npm run compile:watch",
+    "serve": "node out/dist",
     "compile": "tsc",
     "compile:watch": "tsc -w"
+  },
+  "dependencies": {
+    "fastify": "1.11.2",
+    "pino-pretty": "2.2.0"
   },
   "devDependencies": {
     "@types/node": "10.9.4",
