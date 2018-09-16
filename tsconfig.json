@@ -7,7 +7,7 @@
     "noImplicitReturns": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "out/dist",
+    "outDir": "out/tsc-out",
     "baseUrl": ".",
     "paths": {
       "*": [
