@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import {Server} from './api'
 import {log} from '../core/log'
+import 'source-map-support/register'
 
 let timeoutId: NodeJS.Timer = null
 let server: Server = null

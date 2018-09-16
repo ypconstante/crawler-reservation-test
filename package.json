@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "fastify": "1.11.2",
-    "pino-pretty": "2.2.0"
+    "pino-pretty": "2.2.0",
+    "source-map-support": "^0.5.9"
   },
   "devDependencies": {
     "@types/node": "10.9.4",
