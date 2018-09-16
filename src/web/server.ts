@@ -6,11 +6,7 @@ import 'source-map-support/register'
 let server: Server = null
 
 export async function startServer() {
-  server = fastify({
-    logger: log,
-  })
-
-  require('./rest/search').register(server)
+  server = createServer()
 
   try {
     const port = 3000
@@ -21,6 +17,16 @@ export async function startServer() {
     process.exit(1)
     throw err
   }
+}
+
+export function createServer() {
+  const server = fastify({
+    logger: log,
+  })
+
+  require('./rest/search').register(server)
+
+  return server
 }
 
 export function stopServer() {
