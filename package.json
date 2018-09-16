@@ -7,21 +7,20 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run compile",
-    "start": "npm run compile && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run compile:watch\" \"npm run serve:watch\"",
+    "start": "ts-node ./scripts/build.ts -w",
     "serve": "node out/dist",
-    "serve:watch": "node out/dist -w",
-    "compile": "tsc",
-    "compile:watch": "tsc -w"
+    "compile": "ts-node ./scripts/build"
   },
   "dependencies": {
     "fastify": "1.11.2",
     "pino-pretty": "2.2.0"
   },
   "devDependencies": {
-    "@types/chokidar": "1.7.5",
     "@types/node": "10.9.4",
-    "chokidar": "2.0.4",
-    "concurrently": "4.0.1",
-    "typescript": "3.0.3"
+    "@types/webpack": "4.4.11",
+    "ts-loader": "5.1.1",
+    "ts-node": "7.0.1",
+    "typescript": "3.0.3",
+    "webpack": "4.19.0"
   }
 }
