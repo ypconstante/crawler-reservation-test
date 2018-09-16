@@ -1,8 +1,6 @@
 import webpack, {Compiler, ProgressPlugin, Stats} from 'webpack'
 import config from '../webpack.config'
-import {resetServer} from '../src/web/server'
-
-const watchMode = process.argv.indexOf('-w') >= 0
+import {watchMode} from './build-arguments'
 
 const compiler = createCompiler()
 
@@ -11,7 +9,7 @@ if (watchMode) {
 
   compiler.hooks.done.tap(
     'WebpackInfo',
-    resetServer,
+    createServerHandler(),
   )
 } else {
   compiler.run(compilerCallback)
@@ -39,5 +37,46 @@ function compilerCallback(err: Error, stats: Stats) {
 
   if (!config.watch && stats.hasErrors()) {
     process.exitCode = 2
+  }
+}
+
+function createServerHandler() {
+  let resetPending = false
+  let serverStopProvider = defaultGetServerStopper()
+
+  return serverHandler
+
+  function serverHandler() {
+    if (resetPending) {
+      return
+    }
+    resetPending = true
+    serverStopProvider = new Promise((resolve, reject) => {
+      stopServer()
+        .then(() => {
+          resetPending = false
+          clearCache()
+          const server = require('../out/dist')
+          server.startServer()
+          resolve(server.stopServer)
+        })
+        .catch(reject)
+    })
+  }
+
+  function stopServer() {
+    return serverStopProvider.then(stopServer => stopServer())
+  }
+
+  function defaultGetServerStopper() {
+    return Promise.resolve(() => {
+      return
+    })
+  }
+
+  function clearCache() {
+    Object.keys(require.cache)
+      .filter(path => /[\/\\]out[\/\\]dist[\/\\]/.test(path))
+      .forEach(path => delete require.cache[path])
   }
 }

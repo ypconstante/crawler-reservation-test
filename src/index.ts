@@ -1,3 +1,7 @@
 import {startServer} from './web/server'
 
-startServer()
+if (!env.watchMode) {
+  startServer()
+}
+
+export {startServer, stopServer} from './web/server'

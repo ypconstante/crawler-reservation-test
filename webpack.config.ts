@@ -1,5 +1,6 @@
-import {Configuration} from 'webpack'
+import {Configuration, DefinePlugin} from 'webpack'
 import path from 'path'
+import {watchMode} from './scripts/build-arguments'
 
 const cwd = __dirname
 const dist = path.join(cwd, 'out', 'dist')
@@ -15,7 +16,8 @@ const config: Configuration = {
   output: {
     filename: 'index.js',
     path: dist,
-    publicPath: '/'
+    publicPath: '/',
+    libraryTarget: 'commonjs',
   },
   module: {
     rules: [
@@ -26,7 +28,13 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new DefinePlugin({
+      env: {
+        watchMode: watchMode,
+      },
+    }),
+  ],
 }
 
 export default config
