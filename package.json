@@ -17,11 +17,13 @@
   },
   "dependencies": {
     "fastify": "1.11.2",
+    "i18next": "11.9.0",
     "lodash": "^4.17.11",
     "pino-pretty": "2.2.0",
     "source-map-support": "^0.5.9"
   },
   "devDependencies": {
+    "@types/i18next": "8.4.5",
     "@types/jest": "23.3.2",
     "@types/lodash": "4.14.116",
     "@types/node": "10.9.4",
