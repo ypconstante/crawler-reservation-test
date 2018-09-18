@@ -9,7 +9,26 @@
 - [Yarn](https://yarnpkg.com/en/)
 
 # Running locally
-TODO
+```$sh
+yarn install
+yarn start
+```
 
 # Deploying the app
-TODO
+```$sh
+yarn install
+yarn run build
+yarn run serve
+```
+
+# Endpoints
+```
+GET /buscar
+
+Query parmas
+- dataCheckIn - data de check in no formato ISO - exemplo 2019-06-01
+- dataCheckOut - data de check out no formato ISO - exemplo 2019-06-02
+
+Exemplo
+GET http://127.0.0.1:3000/buscar?dataCheckIn=2019-06-01&dataCheckOut=2019-06-02
+```
