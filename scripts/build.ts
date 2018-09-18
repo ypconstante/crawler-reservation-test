@@ -1,6 +1,7 @@
 import webpack, {Compiler, ProgressPlugin, Stats} from 'webpack'
 import config from '../webpack.config'
 import {watchMode} from './build-arguments'
+import 'source-map-support/register'
 
 const compiler = createCompiler()
 
