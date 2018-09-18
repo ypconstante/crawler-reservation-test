@@ -1,7 +1,9 @@
-import fastify from 'fastify'
+import fastify, {FastifyReply, FastifyRequest} from 'fastify'
 import {Server} from './api'
 import {closeLogger, log} from '../core/log'
 import 'source-map-support/register'
+import {IncomingMessage, ServerResponse} from 'http'
+import {ValidationError} from '../core/ValidationError'
 
 let server: Server = null
 
@@ -25,6 +27,7 @@ export function createServer() {
   })
 
   require('./rest/search').register(server)
+  server.setErrorHandler(errorHandler)
 
   return server
 }
@@ -38,3 +41,15 @@ export function stopServer() {
   })
 }
 
+function errorHandler(error: Error, request: FastifyRequest<IncomingMessage>, reply: FastifyReply<ServerResponse>) {
+  if (error instanceof ValidationError) {
+    debugger
+    reply
+      .code(422)
+      .send(error.errors)
+  } else {
+    reply
+      .code(500)
+      .send(error.message)
+  }
+}
