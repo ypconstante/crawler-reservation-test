@@ -8,6 +8,7 @@
   "scripts": {
     "build": "npm run compile",
     "start": "npm run clean && ts-node ./scripts/build.ts -w",
+    "start:debug": "npm run clean &&  node --inspect ./node_modules/.bin/ts-node ./scripts/build.ts -w",
     "serve": "node out/dist",
     "test": "jest --watch -u",
     "test:run": "jest --no-cache",
