@@ -31,6 +31,7 @@ const config: Configuration = {
   plugins: [
     new DefinePlugin({
       env: {
+        test: false,
         watchMode: watchMode,
       },
     }),

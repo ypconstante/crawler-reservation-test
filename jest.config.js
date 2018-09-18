@@ -1,3 +1,5 @@
+const env = require('./src/test/mock/env')
+
 const config = {
   roots: [
     '<rootDir>/src/',
@@ -17,6 +19,7 @@ const config = {
     'ts-jest': {
       tsConfigFile: 'tsconfig.json',
     },
+    env,
   },
 
   collectCoverageFrom: [

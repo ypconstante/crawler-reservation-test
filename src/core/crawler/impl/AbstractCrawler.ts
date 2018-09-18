@@ -38,7 +38,8 @@ export abstract class AbstractCrawler<T> implements Crawler<T> {
   async createPage() {
     if (!this.page) {
       this.browser = await launch({
-        executablePath: 'out/dist' + executablePath(),
+        executablePath: env.test ? undefined : 'out/dist' + executablePath(),
+        args: env.test ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
       })
       this.page = await this.browser.newPage()
     }
