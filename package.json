@@ -6,15 +6,17 @@
   "author": "Yuri Pereira <ypconstante@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm run compile",
-    "start": "npm run clean && ts-node ./scripts/build.ts -w",
-    "start:debug": "npm run clean &&  node --inspect ./node_modules/.bin/ts-node ./scripts/build.ts -w",
+    "build": "npm run build-prepare && npm run compile",
+    "start": "npm run build-prepare && ts-node ./scripts/build.ts -w",
+    "start:debug": "npm run build-prepare && node --inspect ./node_modules/.bin/ts-node ./scripts/build.ts -w",
     "serve": "node out/dist",
     "test": "jest --watch -u",
     "test:run": "jest --no-cache",
     "test:ci": "jest --no-cache --coverage",
-    "compile": "npm run clean && ts-node ./scripts/build",
-    "clean": "rimraf out/dist"
+    "compile": "ts-node ./scripts/build",
+    "build-prepare": "npm run clean && npm run copy-chromium",
+    "clean": "rimraf out/dist out/.local-chromium",
+    "copy-chromium": "cpy .local-chromium/**/* ../../out/dist/ --cwd=node_modules/puppeteer --parents"
   },
   "dependencies": {
     "fastify": "1.11.2",
@@ -33,6 +35,7 @@
     "@types/node": "10.9.4",
     "@types/puppeteer": "1.6.4",
     "@types/webpack": "4.4.11",
+    "cpy-cli": "2.0.0",
     "jest": "23.6.0",
     "rimraf": "2.6.2",
     "ts-jest": "23.1.4",

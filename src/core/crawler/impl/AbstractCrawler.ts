@@ -1,7 +1,8 @@
-import {Browser, launch, Page} from 'puppeteer'
+import {Browser, executablePath, launch, Page} from 'puppeteer'
 import {Filter, validateFilter} from '../filter'
 import {Crawler} from '../Crawler'
 import {ValidationError} from '../../ValidationError'
+import {log} from '../../log'
 
 export abstract class AbstractCrawler<T> implements Crawler<T> {
   private extractionRunning: boolean
@@ -36,14 +37,18 @@ export abstract class AbstractCrawler<T> implements Crawler<T> {
 
   async createPage() {
     if (!this.page) {
-      this.browser = await launch()
+      this.browser = await launch({
+        executablePath: 'out/dist' + executablePath(),
+      })
       this.page = await this.browser.newPage()
     }
     return this.page
   }
 
   async goToPage() {
-    await this.page.goto(this.getUrl())
+    const url = this.getUrl()
+    log.info(`Acessing url ${url}`)
+    await this.page.goto(url)
   }
 
   abstract getUrl(): string
