@@ -20,6 +20,7 @@ export class OmnibeesReservationCrawler extends AbstractCrawler<ReservationData>
   }
 
   async getErrors(): Promise<string[]> {
+    /* istanbul ignore next */
     const error = await this.page.evaluate(() => {
       const errorElement = document.querySelector('.noResults .info-message h2')
       return errorElement ? errorElement.textContent : null
@@ -28,6 +29,7 @@ export class OmnibeesReservationCrawler extends AbstractCrawler<ReservationData>
   }
 
   extractContent(): Promise<ReservationData[]> {
+    /* istanbul ignore next */
     return this.page.$$eval(
       '#rooms_results .roomName',
       (elements) => {

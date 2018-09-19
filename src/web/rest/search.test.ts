@@ -16,7 +16,7 @@ afterEach(() => {
   server.close(noop)
 })
 
-test.skip('GET /buscar', async () => {
+test('GET /buscar', async () => {
   const year = DateTime.local().year + 1
 
   const response = await server.inject({
