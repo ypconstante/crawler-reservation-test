@@ -7,11 +7,10 @@ import {ValidationError} from '../core/ValidationError'
 
 let server: Server = null
 
-export async function startServer() {
+export async function startServer(port = 3000) {
   server = createServer()
 
   try {
-    const port = 3000
     await server.listen(port)
     return server
   } catch (err) {

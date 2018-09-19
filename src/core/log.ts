@@ -1,7 +1,7 @@
 import pino, {Logger} from 'pino'
 
 const pretty = pino.pretty()
-pretty.pipe(process.stdout)
+startLogger()
 
 export const log: Logger = pino(
   {
@@ -9,6 +9,10 @@ export const log: Logger = pino(
   },
   pretty,
 )
+
+export function startLogger() {
+  pretty.pipe(process.stdout)
+}
 
 export function closeLogger() {
   pretty.unpipe(process.stdout)
